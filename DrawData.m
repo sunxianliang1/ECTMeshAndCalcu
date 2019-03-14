@@ -1,3 +1,7 @@
+%创建上位机绘图所用数据
+%注意：：：：上位机用的单元号是1：m，而不是网格划分时用的有间隔的。
+%%%%%
+
 local_address=pwd;
 mkdir(local_address,'draw');
 M=200;  %行列数
