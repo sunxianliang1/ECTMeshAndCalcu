@@ -33,18 +33,20 @@ fclose(fid);
 
 fid=fopen([local_address '\draw\concentration line.txt'],'w');
 for i=1:NumImageElem    
-    fprintf(fid,'%d %f\r\n',i,Element(ImageElem(i)).delta);
+    fprintf(fid,'%d %f\r\n',i-1,-Element(ImageElem(i)).delta);
 end
 fprintf(fid,'-1 0\r\n');
 fclose(fid);
 
 fid=fopen([local_address '\draw\concentration rectangle.txt'],'w');
-for i=0:49
-    h=i*0.2-4.8;
+f=20;
+dh=10/f;
+for i=0:f-1
+    h=i*dh-5;
     k=0;
     
     for j=1:NumImageElem    
-        if Element(ImageElem(j)).MidNode.PosX<h &&Element(ImageElem(j)).MidNode.PosX>=h-0.2
+        if Element(ImageElem(j)).MidNode.PosY>h &&Element(ImageElem(j)).MidNode.PosY<=h+dh
             k=k+1;
             s(k)=j;
         end
