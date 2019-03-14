@@ -8,7 +8,7 @@ M=200;  %ÐÐÁÐÊý
 L=5 ;   %»æÍ¼°ë¾¶
 fid=fopen([local_address '\draw\concentration circle.txt'],'w');
 d2=zeros(NumImageElem,1);
-d1=[0:701]';
+d1=[1:NumImageElem]';
 d=[d2 d1];
 for i=1:M
     for j=1:M
@@ -19,7 +19,7 @@ for i=1:M
         end
         c=sortrows(d);
         c1=c(1:6,1);
-        c1=c1.^-0.75;
+        c1=c1.^-1;
         c1=c1/sum(c1);
         fprintf(fid,'%d %d\r\n',i,j);
         for m=1:6

@@ -1,4 +1,3 @@
-clear all
 
 e0=8.855e-12;  %介电常数
 Efull=4.0;  %煤粉介电常数
@@ -19,7 +18,7 @@ BigNum=1e20;
 %     c1,c2,c3
 %     delta
 %     e       介电常数
-nodeinf='nodeinf.xlsx';
+
 tempA=xlsread(nodeinf,'coor');
 tempB=size(tempA);
 NumNode=tempB(1,1);
