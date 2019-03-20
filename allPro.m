@@ -1,5 +1,5 @@
 clear all
-nodeinf='nodeinf.xlsx';
+nodeinf='nodeinf.xls';
 lmc8struct
 PrintLMCTotxt
 DrawData
