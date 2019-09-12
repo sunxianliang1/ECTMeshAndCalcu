@@ -8,7 +8,7 @@ ir1=5;%新内径
 or1=k*or;%新外径
 or2=or1+2;%屏蔽罩外径
 
-h0=0.35;%初始化网格长度
+h0=0.5;%初始化网格长度
 bbox=[-or2,-or2;or2,or2];%最大边界范围
 fd=@(p) sqrt(sum(p.^2,2))-or2;%距离函数
 fh=@(p) scalemy(dcircle(p,0,0,0),ir1,or1);%网格大小
@@ -53,12 +53,11 @@ end
 function scale = scalemy(r,ir,or)
 n=max(size(r));
 for i=1:n
-    if r(i)<ir  scale(i)=0.08;
+    if r(i)<ir  scale(i)=8;
 %     elseif r(i)<ir  scale(i)=0.1+(ir-r(i))/10;
-    elseif r(i)<or+1   scale(i)=0.05;   
-    else scale(i)=0.05+(r(i)-or-1)*0.15/2;
+    elseif r(i)<or     scale(i)=8;10-(r(i)-ir)*2;
+    else     scale(i)=8;+(r(i)-or)*1.5;
     end       
 end
 scale=scale';
 end
-

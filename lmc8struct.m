@@ -1,10 +1,10 @@
 
 e0=8.855e-12;  %介电常数
-Efull=4.0;  %煤粉介电常数
+Efull=3;  %煤粉介电常数
 Eempty=1;   %空气介电常数
-Eglass=4.0;   %石英玻璃管道介电常数
-Eout=2.5;   %屏蔽层介电常数
-BigNum=1e20;
+Eglass=3.4;   %石英玻璃管道介电常数
+Eout=1;   %屏蔽层介电常数
+BigNum=1e10;
 
 
 % Class Node
@@ -111,9 +111,9 @@ for NS=1:NumImageElem+2
         end
     end
     %    %%##%%%%%%%%##%%
- 
-    ProElecNode=[1 24];%保护电极 Protective electrode
-    EleElecNode=[6:19];%带电电极
+    n1=1;n2=2;n3=16;
+    ProElecNode=[1:n1 25-n1:24];%保护电极 Protective electrode
+    EleElecNode=[n1+n2+1:24-n1-n2];%带电电极
     AllElecNode=[ProElecNode EleElecNode];
     for i=1:8   %%设置电极结点边界条件
         NumBN=(i-1)*NumOneElecNode;
@@ -135,18 +135,8 @@ for NS=1:NumImageElem+2
             B(ElecNode(NumBN+j,2))=10*BigNum;
         end
         KK=sparse(K);%改为稀疏矩阵，增加速度
-        warning off
         V=KK\B;%计算结点电电势
-        warning on
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%计算电极电荷Q
-%         for i=1:1647
-%             X(i)=Node(i).PosX;
-%             Y(i)=Node(i).PosY;
-%         end
-%         TRI = delaunay(X,Y);
-%         % triplot(TRI,X,Y);
-%         trisurf(TRI,X,Y,V);   
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%计算电极电荷Q 
         for ResElec=ExcElec+1:8  %响应电极Response electrode
             NumBN=(ResElec-1)*NumOneElecNode;
             NumTwoEle=NumTwoEle+1;
@@ -244,7 +234,7 @@ hold on
 plot(CL)
 hold on
 plot(CH-CL)
-
+saveas(gcf, 'test', 'png')
 
 
 

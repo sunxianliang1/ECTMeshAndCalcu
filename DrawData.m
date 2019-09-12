@@ -6,6 +6,35 @@ local_address=pwd;
 mkdir(local_address,'draw');
 M=200;  %行列数
 L=5 ;   %绘图半径
+
+fid=fopen([local_address '\draw\point in tri.txt'],'w');
+%判断点在哪个三角形内
+for i=1:M
+    for j=1:M
+        x=2*L / (2.0 * M)*(2 * i - 1)-L;
+        y=2*L / (2.0 * M)*(2 * j - 1)-L;
+        P=[x y];
+        for k=1:NumImageElem
+            A=[Element(ImageElem(k)).Node(1).PosX Element(ImageElem(k)).Node(1).PosY];
+            B=[Element(ImageElem(k)).Node(2).PosX Element(ImageElem(k)).Node(2).PosY];
+            C=[Element(ImageElem(k)).Node(3).PosX Element(ImageElem(k)).Node(3).PosY];
+            PA=P-A;
+            PB=P-B;
+            PC=P-C ;
+            t1=PA(1)*PB(2)-PA(2)*PB(1);
+            t2=PB(1)*PC(2)-PB(2)*PC(1);
+            t3=PC(1)*PA(2)-PC(2)*PA(1);
+            if t1*t2>=0&&t2*t3>=0 
+                break;
+            end
+        end
+        fprintf(fid,'%d %d %d\r\n',i,j,k);
+    end
+end
+fprintf(fid,'-1 -1\r\n');
+fclose(fid);
+
+
 fid=fopen([local_address '\draw\concentration circle.txt'],'w');
 d2=zeros(NumImageElem,1);
 d1=[1:NumImageElem]';
@@ -30,6 +59,8 @@ for i=1:M
 end
 fprintf(fid,'-1 -1\r\n');
 fclose(fid);
+
+        
 
 fid=fopen([local_address '\draw\concentration line.txt'],'w');
 for i=1:NumImageElem    

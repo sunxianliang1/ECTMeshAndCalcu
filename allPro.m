@@ -1,6 +1,7 @@
 clear all
-nodeinf='nodeinf.xls';
+nodeinf='nodeinf.xlsx';
 lmc8struct
 PrintLMCTotxt
-DrawData
+PrintLMCToExcel
+
 

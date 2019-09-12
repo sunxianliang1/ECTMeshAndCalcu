@@ -1,11 +1,11 @@
 clear all
 
 e0=8.855e-12;  %介电常数
-Efull=4.0;  %煤粉介电常数
+Efull=3;  %煤粉介电常数
 Eempty=1;   %空气介电常数
-Eglass=4.0;   %石英玻璃管道介电常数
-Eout=2.5;   %屏蔽层介电常数
-BigNum=1e20;
+Eglass=3.4;   %石英玻璃管道介电常数
+Eout=1;   %屏蔽层介电常数
+BigNum=1e10;
 
 
 % Class Node
@@ -108,8 +108,8 @@ for NS=1:2
     end
     %    %%##%%%%%%%%##%%
  
-    ProElecNode=[1 24];%保护电极 Protective electrode
-    EleElecNode=[6:19];%带电电极
+    ProElecNode=[1     24];%保护电极 Protective electrode
+    EleElecNode=[4:21];%带电电极
     AllElecNode=[ProElecNode EleElecNode];
     for i=1:8   %%设置电极结点边界条件
         NumBN=(i-1)*NumOneElecNode;

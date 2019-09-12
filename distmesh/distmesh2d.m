@@ -120,7 +120,7 @@ while 1
 
   % 8. Termination criterion: All interior nodes move less than dptol (scaled)
   if max(sqrt(sum(deltat*Ftot(d<-geps,:).^2,2))/h0)<dptol, break; end
-  if count>100   break;end
+  if count>1000   break;end
 end
 
 % Clean up and plot final mesh
